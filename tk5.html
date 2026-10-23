@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK5 - Accordion đơn giản</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f4f6f9;
+        }
+
+        h1 {
+            color: #4338ca;
+        }
+
+        .accordion {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            text-align: left;
+            font-size: 18px;
+            background-color: #4338ca;
+            color: white;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            background-color: white;
+            transition: max-height 0.4s ease;
+            border-radius: 6px;
+        }
+
+        .panel p {
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .panel.active {
+            max-height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bài TK5: Accordion đơn giản</h1>
+
+    <button class="accordion" onclick="toggleAccordion()">
+        Bấm vào đây để xem nội dung ▼
+    </button>
+
+    <div class="panel" id="panel">
+        <p>
+            Xin chào! Đây là nội dung của Accordion.
+            Bạn có thể bấm vào tiêu đề để hiện hoặc ẩn nội dung này.
+        </p>
+    </div>
+
+    <script>
+        function toggleAccordion() {
+            const panel = document.getElementById("panel");
+            panel.classList.toggle("active");
+        }
+    </script>
+</body>
+</html>

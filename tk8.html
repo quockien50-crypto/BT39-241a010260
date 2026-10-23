@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK8 - Chuyển Hex sang RGB</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #cccccc;
+        }
+
+        h1 {
+            color: #4338ca;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 18px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 12px 24px;
+            color: white;
+            background-color: #4f46e5;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #ketQua {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        #mauSac {
+            width: 150px;
+            height: 100px;
+            margin: 20px auto 0;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Chuyển Hex sang RGB</h1>
+
+        <p>Nhập mã màu Hex, ví dụ: #FF0000</p>
+
+        <input type="text" id="maHex" value="#FF0000"
+               placeholder="Nhập mã màu Hex">
+
+        <br>
+
+        <button onclick="chuyenHexSangRGB()">
+            Chuyển đổi
+        </button>
+
+        <div id="ketQua"></div>
+        <div id="mauSac"></div>
+    </div>
+
+    <script>
+        function chuyenHexSangRGB() {
+            let hex = document.getElementById("maHex").value.trim();
+
+            // Bỏ dấu # nếu có
+            if (hex.startsWith("#")) {
+                hex = hex.substring(1);
+            }
+
+            // Kiểm tra mã Hex có đúng 6 ký tự hay không
+            if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+                document.getElementById("ketQua").textContent =
+                    "Mã màu Hex không hợp lệ!";
+
+                document.getElementById("mauSac").style.backgroundColor =
+                    "transparent";
+
+                return;
+            }
+
+            // Chuyển Hex thành RGB
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+
+            const rgb = `rgb(${r}, ${g}, ${b})`;
+
+            // Hiển thị kết quả
+            document.getElementById("ketQua").textContent = rgb;
+
+            // Hiển thị màu tương ứng
+            document.getElementById("mauSac").style.backgroundColor = rgb;
+        }
+    </script>
+
+</body>
+</html>

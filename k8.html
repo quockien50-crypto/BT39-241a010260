@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K8 - Tính chỉ số BMI</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #cccccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4338ca;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3730a3;
+        }
+
+        #ketQua {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f3f4f6;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Tính chỉ số BMI</h1>
+
+        <label for="canNang">Cân nặng (kg):</label>
+        <input type="number" id="canNang"
+               placeholder="Ví dụ: 60" min="0.1" step="any">
+
+        <label for="chieuCao">Chiều cao (m):</label>
+        <input type="number" id="chieuCao"
+               placeholder="Ví dụ: 1.65" min="0.1" step="any">
+
+        <button onclick="tinhBMI()">Tính BMI</button>
+
+        <div id="ketQua">
+            Nhập cân nặng và chiều cao để tính BMI.
+        </div>
+    </div>
+
+    <script>
+        function tinhBMI() {
+            const canNang = Number(
+                document.getElementById("canNang").value
+            );
+
+            const chieuCao = Number(
+                document.getElementById("chieuCao").value
+            );
+
+            const ketQua = document.getElementById("ketQua");
+
+            // Kiểm tra dữ liệu đầu vào
+            if (canNang <= 0 || chieuCao <= 0 ||
+                !Number.isFinite(canNang) ||
+                !Number.isFinite(chieuCao) ||
+                document.getElementById("canNang").value === "" ||
+                document.getElementById("chieuCao").value === "") {
+
+                ketQua.textContent =
+                    "Vui lòng nhập cân nặng và chiều cao hợp lệ.";
+                return;
+            }
+
+            // Tính chỉ số BMI
+            const bmi = canNang / (chieuCao * chieuCao);
+
+            let phanLoai;
+
+            if (bmi < 18.5) {
+                phanLoai = "Thiếu cân";
+            } else if (bmi < 25) {
+                phanLoai = "Bình thường";
+            } else {
+                phanLoai = "Thừa cân";
+            }
+
+            // Hiển thị kết quả
+            ketQua.innerHTML =
+                "Chỉ số BMI: <strong>" + bmi.toFixed(2) +
+                "</strong><br><br>Phân loại: <strong>" +
+                phanLoai + "</strong>";
+        }
+    </script>
+
+</body>
+</html>
